@@ -40,9 +40,9 @@ class bar
 
 int main()
 {
-  foo f1;
-  foo f2 = f1;
+    foo f1;
+    foo f2 = f1;
 
-  bar b1;
-  bar b2 = std::move(b1);
+    bar b1;
+    bar b2 = std::move(b1);
 }

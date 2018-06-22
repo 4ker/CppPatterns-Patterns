@@ -1,17 +1,16 @@
 // Read a line of values
 
-#include <vector>
-#include <sstream>
 #include <iterator>
+#include <sstream>
+#include <vector>
 
 int main()
 {
-  std::istringstream stream{"4 36 72 8"};
-  std::vector<int> values;
+    std::istringstream stream{"4 36 72 8"};
+    std::vector<int> values;
 
-  std::copy(std::istream_iterator<int>{stream},
-            std::istream_iterator<int>{},
-            std::back_inserter(values));
+    std::copy(std::istream_iterator<int>{stream}, std::istream_iterator<int>{},
+              std::back_inserter(values));
 }
 
 // Read a sequence of delimited values from a single line of an

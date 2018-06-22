@@ -1,24 +1,21 @@
 // Copy a range of elements
 // C++11
 
-#include <vector>
 #include <algorithm>
 #include <iterator>
+#include <vector>
 
 std::vector<int> target2(5);
 std::vector<int> target3;
 
-template <typename RangeOfInts>
-void foo(RangeOfInts source)
+template <typename RangeOfInts> void foo(RangeOfInts source)
 {
-  std::vector<int> target1{std::begin(source),
-                           std::end(source)};
+    std::vector<int> target1{std::begin(source), std::end(source)};
 
-  std::copy(std::begin(source), std::end(source),
-            std::begin(target2));
+    std::copy(std::begin(source), std::end(source), std::begin(target2));
 
-  std::copy(std::begin(source), std::end(source),
-            std::back_inserter(target3));
+    std::copy(std::begin(source), std::end(source),
+              std::back_inserter(target3));
 }
 
 // Copy elements from a range to another range or container.
@@ -43,12 +40,13 @@ void foo(RangeOfInts source)
 // To demonstrate how we can copy into a container that does not
 // yet contain any elements, we have an empty `std::vector<int>`
 // called `target3` on [9]. For the third argument of
-// `std::copy` ([20-21]), we call [`std::back_inserter`](cpp/iterator/back_inserter)
+// `std::copy` ([20-21]), we call
+// [`std::back_inserter`](cpp/iterator/back_inserter)
 // to get an iterator that automatically calls `push_back` on `target3`
 // for each element that is copied.
 
 int main()
 {
-  std::vector<int> vec = {5, 4, 3, 2, 1};
-  foo(vec);
+    std::vector<int> vec = {5, 4, 3, 2, 1};
+    foo(vec);
 }

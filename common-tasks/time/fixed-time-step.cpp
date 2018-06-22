@@ -10,12 +10,12 @@ void some_complex_work();
 
 int main()
 {
-  using clock = std::chrono::steady_clock;
-  clock::time_point next_time_point = clock::now() + 5s;
+    using clock = std::chrono::steady_clock;
+    clock::time_point next_time_point = clock::now() + 5s;
 
-  some_complex_work();
+    some_complex_work();
 
-  std::this_thread::sleep_until(next_time_point);
+    std::this_thread::sleep_until(next_time_point);
 }
 
 // Block the execution of a thread until a fixed point in time.
@@ -46,4 +46,4 @@ int main()
 // sleep for a fixed amount of time, see the [sleep
 // sample](/common-tasks/sleep.html).
 
-void some_complex_work() { }
+void some_complex_work() {}

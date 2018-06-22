@@ -1,23 +1,23 @@
 // Create a thread
 // C++11
 
-#include <thread>
-#include <string>
 #include <functional>
+#include <string>
+#include <thread>
 
-void func(std::string str, int& x);
+void func(std::string str, int &x);
 void do_something();
 
 int main()
 {
-  std::string str = "Test";
-  int x = 5;
+    std::string str = "Test";
+    int x = 5;
 
-  std::thread t{func, str, std::ref(x)};
+    std::thread t{func, str, std::ref(x)};
 
-  do_something();
+    do_something();
 
-  t.join();
+    t.join();
 }
 
 // Execute code on a separate thread.
@@ -52,8 +52,6 @@ int main()
 // **Note**: If `func` propagates an exception, `std::terminate` will
 // be called.
 
-void func(std::string, int&)
-{ }
+void func(std::string, int &) {}
 
-void do_something()
-{ }
+void do_something() {}

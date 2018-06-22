@@ -6,15 +6,13 @@
 class foo
 {
   public:
-    foo(int n_, char c_, double d_)
-      : n{n_}, c{c_}, d{d_}
-    {}
+    foo(int n_, char c_, double d_) : n{n_}, c{c_}, d{d_} {}
 
-    friend bool operator<(const foo& lh, const foo& rh)
+    friend bool operator<(const foo &lh, const foo &rh)
     {
-      return std::tie(lh.n, lh.c, lh.d) <
-             std::tie(rh.n, rh.c, rh.d);
+        return std::tie(lh.n, lh.c, lh.d) < std::tie(rh.n, rh.c, rh.d);
     }
+
   private:
     int n;
     char c;
@@ -43,11 +41,10 @@ class foo
 
 int main()
 {
-  foo f1(1, 'a', 3.14);
-  foo f2(1, 'b', 2.78);
+    foo f1(1, 'a', 3.14);
+    foo f2(1, 'b', 2.78);
 
-  if (f1 < f2)
-  {
-    return 1;
-  }
+    if (f1 < f2) {
+        return 1;
+    }
 }

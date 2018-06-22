@@ -2,28 +2,25 @@
 
 namespace ns
 {
-  class foo
-  {
-    public:
-      void member()
-      {
+class foo
+{
+  public:
+    void member()
+    {
         // Uses private data
-      }
+    }
 
-    private:
-      // Private data
-  };
+  private:
+    // Private data
+};
 
-  void non_member(foo obj)
-  {
-    obj.member();
-  }
+void non_member(foo obj) { obj.member(); }
 }
 
 int main()
 {
-  ns::foo obj;
-  non_member(obj);
+    ns::foo obj;
+    non_member(obj);
 }
 
 // Reduce dependencies on internal class details and improve
@@ -35,7 +32,8 @@ int main()
 // The function `non_member` on [17-20] is also logically part of
 // `foo`'s interface, yet has been defined as a non-member because it
 // can be implemented in terms of `member`. This approach
-// [improves encapsulation](http://www.drdobbs.com/cpp/how-non-member-functions-improve-encapsu/184401197)
+// [improves
+// encapsulation](http://www.drdobbs.com/cpp/how-non-member-functions-improve-encapsu/184401197)
 // by reducing the number of functions that are dependent on the
 // private members of a class.
 //

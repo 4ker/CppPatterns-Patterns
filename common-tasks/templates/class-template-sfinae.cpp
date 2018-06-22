@@ -3,16 +3,17 @@
 
 #include <type_traits>
 
-template <typename T, typename Enable = void>
-class foo;
+template <typename T, typename Enable = void> class foo;
 
 template <typename T>
 class foo<T, typename std::enable_if<std::is_integral<T>::value>::type>
-{ };
+{
+};
 
 template <typename T>
 class foo<T, typename std::enable_if<std::is_floating_point<T>::value>::type>
-{ };
+{
+};
 
 // Conditionally instantiate a class template depending on the
 // template arguments.
@@ -42,6 +43,6 @@ class foo<T, typename std::enable_if<std::is_floating_point<T>::value>::type>
 
 int main()
 {
-  foo<int> f1;
-  foo<float> f2;
+    foo<int> f1;
+    foo<float> f2;
 }

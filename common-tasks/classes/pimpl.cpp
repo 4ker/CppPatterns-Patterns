@@ -11,39 +11,31 @@ class foo
     foo();
     ~foo();
 
-    foo(foo&&);
-    foo& operator=(foo&&);
+    foo(foo &&);
+    foo &operator=(foo &&);
 
   private:
     class impl;
     std::unique_ptr<impl> pimpl;
 };
 
-
 // foo.cpp - implementation file
 
 class foo::impl
 {
   public:
-    void do_internal_work()
-    {
-      internal_data = 5;
-    }
+    void do_internal_work() { internal_data = 5; }
 
   private:
     int internal_data = 0;
 };
 
-foo::foo()
-  : pimpl{std::make_unique<impl>()}
-{
-  pimpl->do_internal_work();
-}
+foo::foo() : pimpl{std::make_unique<impl>()} { pimpl->do_internal_work(); }
 
 foo::~foo() = default;
 
-foo::foo(foo&&) = default;
-foo& foo::operator=(foo&&) = default;
+foo::foo(foo &&) = default;
+foo &foo::operator=(foo &&) = default;
 
 // Remove compilation dependencies on internal class implementations
 // and improve compile times.
@@ -76,9 +68,7 @@ foo& foo::operator=(foo&&) = default;
 // implement the copy constructor and assignment operator.
 //
 // **Note**: `std::make_unique` was introduced in C++14. For C++11,
-// you can [roll your own implementation](http://stackoverflow.com/a/17902439/150634).
+// you can [roll your own
+// implementation](http://stackoverflow.com/a/17902439/150634).
 
-int main()
-{
-  foo f;
-}
+int main() { foo f; }

@@ -1,20 +1,19 @@
 // Delegate behavior to derived classes
 
-template<typename derived>
-class base
+template <typename derived> class base
 {
   public:
     void do_something()
     {
-      // ...
-      static_cast<derived*>(this)->do_something_impl();
-      // ...
+        // ...
+        static_cast<derived *>(this)->do_something_impl();
+        // ...
     }
 
   private:
     void do_something_impl()
     {
-      // Default implementation
+        // Default implementation
     }
 };
 
@@ -23,18 +22,15 @@ class foo : public base<foo>
   public:
     void do_something_impl()
     {
-      // Derived implementation
+        // Derived implementation
     }
 };
 
 class bar : public base<bar>
-{ };
-
-template<typename derived>
-void use(base<derived>& b)
 {
-  b.do_something();
-}
+};
+
+template <typename derived> void use(base<derived> &b) { b.do_something(); }
 
 // Delegate behavior to derived classes without incurring the cost of
 // run-time polymorphism.
@@ -74,9 +70,9 @@ void use(base<derived>& b)
 
 int main()
 {
-  foo f;
-  use(f);
+    foo f;
+    use(f);
 
-  bar b;
-  use(b);
+    bar b;
+    use(b);
 }

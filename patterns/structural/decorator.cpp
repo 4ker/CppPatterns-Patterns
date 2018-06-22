@@ -9,39 +9,33 @@ class foo
 class foo_concrete : public foo
 {
   public:
-    virtual void do_work() override
-    { }
+    virtual void do_work() override {}
 };
 
 class foo_decorator : public foo
 {
   public:
-    foo_decorator(foo& f)
-      : f(f)
-    { }
+    foo_decorator(foo &f) : f(f) {}
 
     virtual void do_work() override
     {
-      // Do something else here to decorate
-      // the do_work function
-      f.do_work();
+        // Do something else here to decorate
+        // the do_work function
+        f.do_work();
     }
 
   private:
-    foo& f;
+    foo &f;
 };
 
-void bar(foo& f)
-{
-  f.do_work();
-}
+void bar(foo &f) { f.do_work(); }
 
 int main()
 {
-  foo_concrete f;
-  foo_decorator decorated_f{f};
+    foo_concrete f;
+    foo_decorator decorated_f{f};
 
-  bar(decorated_f);
+    bar(decorated_f);
 }
 
 // Extend the functionality of a class.

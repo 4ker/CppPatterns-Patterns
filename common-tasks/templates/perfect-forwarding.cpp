@@ -3,11 +3,10 @@
 
 #include <utility>
 
-template<typename T, typename U>
-std::pair<T, U> make_pair_wrapper(T&& t, U&& u)
+template <typename T, typename U>
+std::pair<T, U> make_pair_wrapper(T &&t, U &&u)
 {
-  return std::make_pair(std::forward<T>(t),
-                        std::forward<U>(u));
+    return std::make_pair(std::forward<T>(t), std::forward<U>(u));
 }
 
 // Forward arguments of one function to another as though the wrapped
@@ -26,14 +25,12 @@ std::pair<T, U> make_pair_wrapper(T&& t, U&& u)
 // allowing them to be moved into the pair when the original argument
 // was an rvalue expression.
 //
-// Perfect forwarding is often used with [variadic templates](cpp/language/parameter_pack)
+// Perfect forwarding is often used with [variadic
+// templates](cpp/language/parameter_pack)
 // to wrap calls to functions with an arbitrary number of arguments.
 // For example, [`std::make_unique`](cpp/memory/unique_ptr/make_unique)
 // and [`std::make_shared`](cpp/memory/shared_ptr/make_shared) both
 // use perfect forwarding to forward their arguments to the
 // constructor of the wrapped type.
 
-int main()
-{
-  std::pair<int, int> p1{ make_pair_wrapper(1, 2) };
-}
+int main() { std::pair<int, int> p1{make_pair_wrapper(1, 2)}; }

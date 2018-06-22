@@ -3,56 +3,46 @@
 
 #include <utility>
 
-class resource {
-  int x = 0;
+class resource
+{
+    int x = 0;
 };
 
 class foo
 {
   public:
-    foo()
-      : p{new resource{}}
-    { }
+    foo() : p{new resource{}} {}
 
-    foo(const foo& other)
-      : p{new resource{*(other.p)}}
-    { }
+    foo(const foo &other) : p{new resource{*(other.p)}} {}
 
-    foo(foo&& other)
-      : p{other.p}
+    foo(foo &&other) : p{other.p} { other.p = nullptr; }
+
+    foo &operator=(const foo &other)
     {
-      other.p = nullptr;
+        if (&other != this) {
+            delete p;
+            p = nullptr;
+            p = new resource{*(other.p)};
+        }
+
+        return *this;
     }
 
-    foo& operator=(const foo& other)
+    foo &operator=(foo &&other)
     {
-      if (&other != this) {
-        delete p;
-        p = nullptr;
-        p = new resource{*(other.p)};
-      }
+        if (&other != this) {
+            delete p;
+            p = other.p;
+            other.p = nullptr;
+        }
 
-      return *this;
+        return *this;
     }
 
-    foo& operator=(foo&& other)
-    {
-      if (&other != this) {
-        delete p;
-        p = other.p;
-        other.p = nullptr;
-      }
-
-      return *this;
-    }
-
-    ~foo()
-    {
-      delete p;
-    }
+    ~foo() { delete p; }
 
   private:
-    resource* p;
+    resource *p;
 };
 
 // Safely and efficiently implement RAII to encapsulate the
@@ -104,7 +94,4 @@ class foo
 // destructor entirely by using the
 // [rule of zero](/common-tasks/rule-of-zero.html)
 
-int main()
-{
-  foo f;
-}
+int main() { foo f; }

@@ -3,11 +3,12 @@
 
 #include <random>
 
-int main() {
-  std::random_device r;
-  std::seed_seq seed_seq{r(), r(), r(), r(), r(), r()};
+int main()
+{
+    std::random_device r;
+    std::seed_seq seed_seq{r(), r(), r(), r(), r(), r()};
 
-  std::mt19937 engine{seed_seq};
+    std::mt19937 engine{seed_seq};
 }
 
 // Seed a random number engine with greater unpredictability.

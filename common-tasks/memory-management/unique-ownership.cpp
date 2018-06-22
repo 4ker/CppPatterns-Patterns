@@ -4,15 +4,16 @@
 #include <memory>
 #include <utility>
 
-struct foo {};
+struct foo
+{
+};
 
-void func(std::unique_ptr<foo> obj)
-{ }
+void func(std::unique_ptr<foo> obj) {}
 
 int main()
 {
-  std::unique_ptr<foo> obj = std::make_unique<foo>();
-  func(std::move(obj));
+    std::unique_ptr<foo> obj = std::make_unique<foo>();
+    func(std::move(obj));
 }
 
 // Transfer unique ownership of a dynamically allocated object to
@@ -35,4 +36,5 @@ int main()
 // [share ownership of an object](/common-tasks/shared-ownership.html).
 //
 // **Note**: `std::make_unique` was introduced in C++14. For C++11,
-// you can [roll your own implementation](http://stackoverflow.com/a/17902439/150634).
+// you can [roll your own
+// implementation](http://stackoverflow.com/a/17902439/150634).

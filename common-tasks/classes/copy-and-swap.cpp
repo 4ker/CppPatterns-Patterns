@@ -3,48 +3,38 @@
 
 #include <utility>
 
-class resource {
-  int x = 0;
+class resource
+{
+    int x = 0;
 };
 
 class foo
 {
   public:
-    foo()
-      : p{new resource{}}
-    { }
+    foo() : p{new resource{}} {}
 
-    foo(const foo& other)
-      : p{new resource{*(other.p)}}
-    { }
+    foo(const foo &other) : p{new resource{*(other.p)}} {}
 
-    foo(foo&& other)
-      : p{other.p}
+    foo(foo &&other) : p{other.p} { other.p = nullptr; }
+
+    foo &operator=(foo other)
     {
-      other.p = nullptr;
+        swap(*this, other);
+
+        return *this;
     }
 
-    foo& operator=(foo other)
+    ~foo() { delete p; }
+
+    friend void swap(foo &first, foo &second)
     {
-      swap(*this, other);
+        using std::swap;
 
-      return *this;
-    }
-
-    ~foo()
-    {
-      delete p;
-    }
-
-    friend void swap(foo& first, foo& second)
-    {
-      using std::swap;
-
-      swap(first.p, second.p);
+        swap(first.p, second.p);
     }
 
   private:
-    resource* p;
+    resource *p;
 };
 
 // Implement the assignment operator with strong exception safety.
@@ -68,7 +58,8 @@ class foo
 // To achieve this, we define a `swap` function for our class on
 // [39-44], which itself calls `swap` on the class's members ([43]).
 // We use a using-declaration on [41] to allow `swap` to be found
-// via [argument-dependent lookup](http://en.wikipedia.org/wiki/Argument-dependent_name_lookup)
+// via [argument-dependent
+// lookup](http://en.wikipedia.org/wiki/Argument-dependent_name_lookup)
 // before using `std::swap` &mdash; this is not strictly necessary
 // in our case, because we are only swapping a pointer, but is good
 // practice in general. Our assignment operator then simply swaps
@@ -87,9 +78,9 @@ class foo
 
 int main()
 {
-  foo f1, f2, f3;
-  f2 = f1;
-  f3 = std::move(f1);
+    foo f1, f2, f3;
+    f2 = f1;
+    f3 = std::move(f1);
 
-  swap(f2, f3);
+    swap(f2, f3);
 }
