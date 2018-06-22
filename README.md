@@ -1,3 +1,7 @@
+Not bad, not good. To little information.
+
+---
+
 # C++ Patterns - Patterns
 
 [C++ Patterns](https://cpppatterns.com/) is a repository of code patterns
