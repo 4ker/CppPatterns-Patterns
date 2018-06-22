@@ -1,5 +1,10 @@
 Not bad, not good. To little information.
 
+Some notes:
+
+-   tie to unpack pair & tuple, you can also std::ignore
+-   future, and async, make be useful
+
 ---
 
 # C++ Patterns - Patterns
